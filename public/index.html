@@ -237,6 +237,19 @@
             .catch(error => console.error('Error during login:', error));
         });
 
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            currentUserId = null;
+            localStorage.removeItem('userId');
+            document.getElementById('authSection').classList.remove('hidden');
+            document.getElementById('taskSection').classList.add('hidden');
+            document.getElementById('loginStatus').textContent = 'You have logged out.';
+        
+            // Clear username and password fields on logout
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        });
+        
+
         document.getElementById('addTaskBtn').addEventListener('click', () => {
             const taskInput = document.getElementById('taskInput').value;
             if (taskInput) {
