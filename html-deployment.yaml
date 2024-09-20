@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: html-deployment
+  labels:
+    app: html-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: html-deployment
+  template:
+    metadata:
+      labels:
+        app: html-deployment
+    spec:
+      containers:
+        - name: html-deployment
+          image: shoaibisone/todo-microservices:html-v1
+          ports:
+            - containerPort: 8080
