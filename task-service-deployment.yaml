@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task-service
+  labels:
+    app: task-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: task-service
+  template:
+    metadata:
+      labels:
+        app: task-service
+    spec:
+      containers:
+      - name: task-service
+        image: shoaibisone/todo-microservices:task-service-v1
+        ports:
+        - containerPort: 3000
+        env:
+        - name: CONNECTION_STRING
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: CONNECTION_STRING
+
+        - name: taskServicePort
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: taskServicePort
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: task-service-service
+  labels:
+    app: task-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: task-service
+  ports:
+    - protocol: TCP
+      port: 3000
