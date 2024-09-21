@@ -17,11 +17,6 @@ provider "aws" {
   region = "us-east-1"
 }
 
-# Configure the GCP Provider
-provider "google" {
-  project     = "canvas-aviary-436015-s1"
-  region      = "us-central1"
-}
 
 #AWS VPC CONFIG
 resource "aws_vpc" "todolist_vpc" {
@@ -125,45 +120,20 @@ module "eks" {
       max_size     = 2
       desired_size = 1
     }
+
+        three = {
+
+      ami_type       = "AL2023_x86_64_STANDARD"
+      instance_types = ["t2.micro"]
+
+      min_size     = 1
+      max_size     = 2
+      desired_size = 1
+    }
   }
 
     tags = {
     Environment = "dev"
     Terraform   = "true"
-  }
-}
-
-#GCP VPC CONFIG
-
-resource "google_compute_network" "vpc_network" {
-  project                 = "canvas-aviary-436015-s1"
-  name                    = "vpc-network"
-  auto_create_subnetworks = true
-  mtu                     = 1460
-}
-
-
-resource "google_container_cluster" "primary" {
-  name     = "my-gke-cluster"
-  location = "us-central1-a"
-
-  deletion_protection = false
-  # We can't create a cluster with no node pool defined, but we want to only use
-  # separately managed node pools. So we create the smallest possible default
-  # node pool and immediately delete it.
-  remove_default_node_pool = true
-  initial_node_count       = 2
-}
-
-resource "google_container_node_pool" "primary_preemptible_nodes" {
-  name       = "my-node-pool"
-  location   = "us-central1-a"
-
-  cluster    = google_container_cluster.primary.name
-  node_count = 2
-
-  node_config {
-    preemptible  = true
-    machine_type = "e2-micro"
   }
 }

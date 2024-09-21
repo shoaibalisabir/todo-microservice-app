@@ -16,9 +16,9 @@ spec:
     spec:
       containers:
         - name: task-deployment
-          image: shoaibisone/todo-microservices:task-service-v1
+          image: shoaibisone/todo-microservices:task-service-v2
           ports:
-            - containerPort: 3001
+            - containerPort: 3000
           env:
             - name: CONNECTION_STRING
               valueFrom:
@@ -26,8 +26,14 @@ spec:
                   name: app-secret
                   key: CONNECTION_STRING
 
-            - name: userServicePort
+            - name: taskServicePort
               valueFrom:
                 secretKeyRef:
                   name: app-secret
                   key: taskServicePort
+
+            - name: TASK_API_URL
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: TASK_API_URL

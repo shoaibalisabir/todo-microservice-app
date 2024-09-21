@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '../.env' });
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -19,7 +19,7 @@ async function main() {
     const tasksCollection = db.collection('tasks');
 
     app.use(cors());
-    app.use(express.static(path.join(__dirname, '../public')));
+    // app.use(express.static(path.join(__dirname, '../public')));
     app.use(bodyParser.json());
 
     app.post('/tasks', async (req, res) => {

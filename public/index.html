@@ -125,8 +125,12 @@
         </div>
     </div>
     <script>
-        const taskApiUrl = 'http://localhost:3000/tasks';
-        const userApiUrl = 'http://localhost:3001';
+        const taskApiUrl = "${process.env.TASK_API_URL}" !== '0' ? 'http://localhost:3000/tasks' : 'http://localhost:3000/tasks';
+        const userApiUrl = "${process.env.USER_API_URL}" !== '0' ? 'http://localhost:3001' : 'http://localhost:3001';
+
+    console.log(taskApiUrl);
+    console.log(userApiUrl);
+    
 
         let currentUserId = localStorage.getItem('userId');
 
