@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: user-deployment
-        image: shoaibisone/todo-microservices:user-service-v2
+        image: shoaibisone/todo-microservices:user-service-v5
         ports:
          - containerPort: 3001
         env:

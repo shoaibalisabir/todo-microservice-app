@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: task-deployment
-          image: shoaibisone/todo-microservices:task-service-v2
+          image: shoaibisone/todo-microservices:task-service-v5
           ports:
             - containerPort: 3000
           env:

@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: html-deployment
-          image: shoaibisone/todo-microservices:html-v3
+          image: shoaibisone/todo-microservices:html-v7
           ports:
             - containerPort: 8080

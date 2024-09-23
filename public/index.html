@@ -125,8 +125,24 @@
         </div>
     </div>
     <script>
-        const taskApiUrl = "${process.env.TASK_API_URL}" !== '0' ? 'http://localhost:3000/tasks' : 'http://localhost:3000/tasks';
-        const userApiUrl = "${process.env.USER_API_URL}" !== '0' ? 'http://localhost:3001' : 'http://localhost:3001';
+        const userApiUrl = 'http://a546b4937d2d7450aa2b6f157bfb90a0-416600568.us-east-1.elb.amazonaws.com:3001'; 
+        const taskApiUrl = 'http://afcc06d344cdd499087e95264a12ac22-414635635.us-east-1.elb.amazonaws.com:3000/tasks'; 
+        
+            // Fetch the service URLs dynamically
+    fetch('/get-service-urls') // You need to create this endpoint
+    .then(response => response.json())
+    .then(data => {
+        userServiceUrl = data.userServiceUrl;
+        taskServiceUrl = data.taskServiceUrl;
+        // Now you can use userServiceUrl and taskServiceUrl in your code
+
+        console.log('User Service URL:', userServiceUrl);
+        console.log('Task Service URL:', taskServiceUrl);
+    })
+    .catch(error => console.error('Error fetching service URLs:', error));
+
+//        const taskApiUrl = process.env.TASK_API_URL || 'http://localhost:3000/tasks';
+//        const userApiUrl = process.env.USER_API_URL || 'http://localhost:3001';
 
     console.log(taskApiUrl);
     console.log(userApiUrl);
